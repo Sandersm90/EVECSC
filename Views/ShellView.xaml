@@ -1,0 +1,79 @@
+﻿<Window x:Class="EVECSC.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:EVECSC.Views"
+        xmlns:listViewLayout="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
+        mc:Ignorable="d"
+        Title="{Binding ApplicationTitle}" Height="350" Width="350" d:DataContext="{d:DesignData }" WindowStartupLocation="CenterScreen">
+    <Grid Margin="3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="27" />
+            <RowDefinition Height="27" />
+            <RowDefinition Height="27" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0"
+               Grid.Row="0"
+               Content="Settings Folder:" />
+        <ComboBox Grid.Column="1"
+                  Grid.Row="0"
+                  Margin="3"
+                  ItemsSource="{Binding Folders}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding SelectedFolder}"/>
+
+        <GroupBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="3"
+            Padding="5"
+            Header="Characters: 0">
+            <ListView Name="SelectedFolder_Characters"
+                      ItemsSource="{Binding SelectedFolder.Characters}"
+                      listViewLayout:ListViewLayoutManager.Enabled="true">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" listViewLayout:ProportionalColumn.Width="1" />
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" listViewLayout:ProportionalColumn.Width="1" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+
+        <Label Name="SelectedLabel"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Content="{Binding SelectedFolder.FilePath}"
+            />
+        
+        <Button Name="BackupButton"
+                Grid.Column="0"
+                Grid.Row="3"
+                Margin="2"
+                Content="Backup"
+                Command="{Binding BackupCommand}" />
+        <Button Name="RestoreButton"
+                Grid.Column="1"
+                Grid.Row="3"
+                Margin="2"
+                Content="Restore"
+                Command="{Binding RestoreCommand}" />
+        <Button Name="CopyButton"
+                Grid.Column="0"
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Margin="2"
+                Content="Copy to all Characters"
+                Command="{Binding CopyCommand}" />
+    </Grid>
+</Window>
