@@ -84,6 +84,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Compile Include="Bootstrapper.cs" />
+        <Compile Include="Helpers\ListViewImageConverter.cs" />
         <Compile Include="ViewModels\ShellViewModel.cs" />
         <Compile Include="Views\ShellView.xaml.cs">
           <DependentUpon>ShellView.xaml</DependentUpon>
@@ -111,6 +112,11 @@
     </ItemGroup>
     <ItemGroup>
       <Page Include="Views\ShellView.xaml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Content\Icons\female.png" />
+      <Resource Include="Content\Icons\male.png" />
+      <Resource Include="Content\Icons\silhouette.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,8 +5,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:EVECSC.Views"
         xmlns:listViewLayout="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
+        xmlns:evecsc="clr-namespace:EVECSC"
+        xmlns:helpers="clr-namespace:EVECSC.Helpers"
         mc:Ignorable="d"
-        Title="{Binding ApplicationTitle}" Height="350" Width="350" d:DataContext="{d:DesignData }" WindowStartupLocation="CenterScreen">
+        Title="{Binding ApplicationTitle}" Height="350" Width="350" d:DataContext="{d:DesignData }"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <helpers:ListViewImageConverter x:Key="Conv" />
+    </Window.Resources>
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*" />
@@ -15,7 +21,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="27" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="27" />
             <RowDefinition Height="27" />
             <RowDefinition Height="27" />
         </Grid.RowDefinitions>
@@ -28,7 +33,7 @@
                   Margin="3"
                   ItemsSource="{Binding Folders}"
                   DisplayMemberPath="Name"
-                  SelectedItem="{Binding SelectedFolder}"/>
+                  SelectedItem="{Binding SelectedFolder}" />
 
         <GroupBox
             Grid.Row="1"
@@ -36,44 +41,47 @@
             Grid.ColumnSpan="2"
             Margin="3"
             Padding="5"
-            Header="Characters: 0">
+            Header="{Binding SelectedFolder.Characters.Count}"
+            HeaderStringFormat="Characters: {0}">
             <ListView Name="SelectedFolder_Characters"
-                      ItemsSource="{Binding SelectedFolder.Characters}"
-                      listViewLayout:ListViewLayoutManager.Enabled="true">
+                      
+                      listViewLayout:ListViewLayoutManager.Enabled="true"
+                      SelectionMode="Single">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" listViewLayout:ProportionalColumn.Width="1" />
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" listViewLayout:ProportionalColumn.Width="1" />
+                        <GridViewColumn Header="Name" listViewLayout:ProportionalColumn.Width="1">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0">
+                                        <Image Source="{Binding Gender, Converter={StaticResource Conv}}" Width="16"
+                                               Height="16" Margin="0"/>
+                                        <Label Content="{Binding Name}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"
+                                        listViewLayout:ProportionalColumn.Width="1" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </GroupBox>
 
-        <Label Name="SelectedLabel"
-            Grid.Column="0"
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Content="{Binding SelectedFolder.FilePath}"
-            />
-        
-        <Button Name="BackupButton"
+        <Button Name="DoBackup"
                 Grid.Column="0"
-                Grid.Row="3"
+                Grid.Row="2"
                 Margin="2"
-                Content="Backup"
-                Command="{Binding BackupCommand}" />
-        <Button Name="RestoreButton"
+                Content="Backup" />
+        <Button Name="DoRestore"
                 Grid.Column="1"
-                Grid.Row="3"
+                Grid.Row="2"
                 Margin="2"
-                Content="Restore"
-                Command="{Binding RestoreCommand}" />
-        <Button Name="CopyButton"
+                Content="Restore" />
+        <Button Name="DoCopy"
                 Grid.Column="0"
-                Grid.Row="4"
+                Grid.Row="3"
                 Grid.ColumnSpan="2"
                 Margin="2"
-                Content="Copy to all Characters"
-                Command="{Binding CopyCommand}" />
+                Content="Copy to all Characters" />
     </Grid>
 </Window>
