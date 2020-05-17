@@ -8,8 +8,8 @@
         xmlns:evecsc="clr-namespace:EVECSC"
         xmlns:helpers="clr-namespace:EVECSC.Helpers"
         mc:Ignorable="d"
-        Title="{Binding ApplicationTitle}" Height="350" Width="350" d:DataContext="{d:DesignData }"
-        WindowStartupLocation="CenterScreen">
+        Title="{Binding ApplicationTitle}" Height="350" Width="350" d:DataContext="{d:DesignData}"
+        WindowStartupLocation="CenterScreen" Icon="../Content/Icons/icon.png">
     <Window.Resources>
         <helpers:ListViewImageConverter x:Key="Conv" />
     </Window.Resources>
@@ -44,9 +44,9 @@
             Header="{Binding SelectedFolder.Characters.Count}"
             HeaderStringFormat="Characters: {0}">
             <ListView Name="SelectedFolder_Characters"
-                      
                       listViewLayout:ListViewLayoutManager.Enabled="true"
-                      SelectionMode="Single">
+                      SelectionMode="Single"
+                      SelectedItem="{Binding SelectedCharacter}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" listViewLayout:ProportionalColumn.Width="1">
@@ -54,7 +54,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="0">
                                         <Image Source="{Binding Gender, Converter={StaticResource Conv}}" Width="16"
-                                               Height="16" Margin="0"/>
+                                               Height="16" Margin="0" />
                                         <Label Content="{Binding Name}" />
                                     </StackPanel>
                                 </DataTemplate>

@@ -1,6 +1,6 @@
 ﻿// EVECSC - Michael
 // ListViewImageConverter.cs
-// Last Cleanup: 17/05/2020 16:14
+// Last Cleanup: 17/05/2020 17:39
 // Created: 17/05/2020 16:10
 
 #region Directives

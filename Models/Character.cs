@@ -1,6 +1,6 @@
 ﻿// EVECSC - Michael
 // Character.cs
-// Last Cleanup: 16/05/2020 19:01
+// Last Cleanup: 17/05/2020 17:39
 // Created: 16/05/2020 13:17
 
 namespace EVECSC.Models

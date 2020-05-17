@@ -1,6 +1,6 @@
 ﻿// EVECSC - Michael
 // Folder.cs
-// Last Cleanup: 17/05/2020 10:56
+// Last Cleanup: 17/05/2020 17:39
 // Created: 16/05/2020 13:20
 
 #region Directives
@@ -23,10 +23,7 @@ namespace EVECSC.Models
         {
             get
             {
-                if (_characters != null)
-                {
-                    return _characters;
-                }
+                if (_characters != null) return _characters;
 
                 _characters = GetCharacters();
                 return _characters;
